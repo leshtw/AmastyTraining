@@ -1,0 +1,25 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+
+        <css src="Amasty_SecondModule::css/bf.css" rel="stylesheet" type="text/css"/>
+
+    </head>
+
+    <body>
+        <referenceContainer name="content">
+            <container name="coolModule.Amastyalex" htmlTag="div" htmlClass="container-add-form">
+
+                <block name="SecondModule.Amasty_alex.hello"
+                       template="Amasty_SecondModule::index.phtml">
+                    <block name="SecondModule.Amasty_alex.form"
+                           template="Amasty_SecondModule::form-block.phtml">
+                        <block name="SecondModule.Amasty_alex.additional"
+                               template="Amasty_SecondModule::additional-block.phtml">
+                        </block>
+                    </block>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

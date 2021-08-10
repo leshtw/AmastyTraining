@@ -2,3 +2,10 @@
     border: 40px solid #ff0000;
     padding: 30px;
 }
+.form-css, .form-css input{
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid;
+    border-radius: 6px;
+    padding: 20px;
+}

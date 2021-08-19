@@ -10,11 +10,13 @@
         <referenceContainer name="content">
             <container name="coolModule.Amastyalex" htmlTag="div" htmlClass="container-add-form">
 
-                <block name="SecondModule.Amasty_alex.hello"
+                <block name="SecondModule.Amasty_alex.hello" class="Amasty\SecondModule\Block\Index"
                        template="Amasty_SecondModule::index.phtml">
-                    <block name="SecondModule.Amasty_alex.form"
+                    <block name="SecondModule.Amasty_alex.form" class="Amasty\SecondModule\Block\Index"
                            template="Amasty_SecondModule::form-block.phtml">
-                        <arguments name="css" xsi:type="string">form-css</arguments>
+                        <arguments>
+                            <argument name="form_css" xsi:type="string">form-css</argument>
+                        </arguments>
                         <block name="SecondModule.Amasty_alex.additional"
                                template="Amasty_SecondModule::additional-block.phtml">
                         </block>

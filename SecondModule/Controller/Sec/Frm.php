@@ -58,7 +58,7 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
     public function execute()
     {
 
-        $post = $this->getRequest()->getPost();
+
         $qrt = $this->getRequest()->getPost()->get('qty');
         $sku = $this->getRequest()->getPost()->get('sku');
 

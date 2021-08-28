@@ -1,0 +1,10 @@
+<div>
+<p><b>Sku</b>
+    <input type="text" name="sku" data-bind="textInput: searchText">
+</p>
+</div>
+<div class="complete-list">
+    <ul data-bind="foreach: searchResultList">
+        <li data-bind="text: $data"></li>
+    </ul>
+</div>

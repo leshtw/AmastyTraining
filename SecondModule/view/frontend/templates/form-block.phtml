@@ -1,16 +1,35 @@
 <?php
-/** @var Amasty\SecondModule\Block\Index $block*/
+/** @var Amasty\SecondModule\Block\Index $block */
 ?>
+<div data-bind="scope: 'coolAutocomplete'">
+    <form method="post" action="http://localhost/magento2/alex/Sec/frm" data-mage-init='{"validation":{}}'
+          class="<?= $block->getData('form_css') ?>">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <?php if ($block->isShowInput()) { ?>
+            <p><b>Qrt</b>
+                <input type="number" name="qty" value="<?= $block->getQRTNumber() ?>"
+                       data-validate='{"required":true, "validate-not-negative-number":true}'>
+            </p>
+        <?php } ?>
+        <div>
+            <?= $block->getChildHtml() ?>
+        </div>
+        <input type="submit" value="Отправить">
+    </form>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*":{
+            "Magento_Ui/js/core/app": {
+                "components":{
+                    "coolAutocomplete": {
+                        "component": "Amasty_SecondModule/js/koAutocomplete",
+                        "template": "Amasty_SecondModule/koAutocomplete"
+                    }
 
-<form action="" class="form-css">
-    <p><b>Sku</b>
-        <input type="text" name="sku">
-    </p>
-    <p><b>Qrt</b>
-        <input type="number" name="qty">
-    </p>
-    <div>
-        <?= $block->getChildHtml() ?>
-    </div>
-    <input type="submit" value="Отправить">
-</form>
+                }
+            }
+        }
+    }
+
+</script>

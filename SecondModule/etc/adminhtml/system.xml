@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+	<system>
+        <tab id="Amasty_SecondModule" translate="label" sortOrder="10">
+            <label>Amasty Second Module</label>
+        </tab>
+        <section id="my_config" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Second Module Config</label>
+            <tab>Amasty_SecondModule</tab>
+            <resource>Amasty_SecondModule::config</resource>
+            <group id="general" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enabled" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="greeting_text" type="textarea" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Greeting text</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="qrt_enabled" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>qrt Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="qrt_number" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>qrt Number</label>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="qrt_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

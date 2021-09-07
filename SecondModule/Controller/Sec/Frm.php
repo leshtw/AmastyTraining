@@ -20,10 +20,16 @@ use Amasty\SecondModule\Model\Blacklist;
 use Amasty\SecondModule\Model\BlacklistFactory;
 use Amasty\SecondModule\Model\ResourceModel\Blacklist as BlacklistResource;
 use Amasty\SecondModule\Model\ResourceModel\Blacklist\CollectionFactory;
+use Magento\Framework\Event\ManagerInterface as EventManager;
+
 
 class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterface, CsrfAwareActionInterface
 {
 
+    /**
+     * @var EventManager
+     */
+    private $eventManager;
     /**
      * @var BlacklistFactory
      */
@@ -65,7 +71,8 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
         ScopeConfigInterface       $scopeConfig,
         CheckoutSession            $messageManager,
         ProductRepositoryInterface $productRepository,
-        ProductCollectionFactory   $productCollectionFactory
+        ProductCollectionFactory   $productCollectionFactory,
+        EventManager               $eventManager
     )
     {
         parent::__construct($context);
@@ -76,6 +83,7 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
         $this->productRepository = $productRepository;
         $this->productCollectionFactory = $productCollectionFactory;
         $this->collectionFactory = $collectionFactory;
+        $this->eventManager = $eventManager;
     }
 
 
@@ -113,6 +121,11 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
             $quote->save();
         }
         $product = false;
+
+        $this->eventManager->dispatch(
+            'amasty_secondmodule_product_add',
+            ['check_sku' => $sku]
+        );
 
 //        if (isset($sku)) {
 //            $product = $this->productRepository->get($sku);
@@ -182,7 +195,7 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
                 } else if ($qrt + $startQty > $blacklistsku->getData('product_qty')) {
                     $quote->addProduct($product, $blacklistsku->getData('product_qty'));
                     $quote->save();
-                    $this->messageManager->addSuccessMessage('We were able to add only' . $blacklistsku->getData('product_qty'));
+                    $this->messageManager->addSuccessMessage('We were able to add only' ." ". $blacklistsku->getData('product_qty'));
                 }
             } catch (LocalizedException $e) {
                 $this->messageManager->addExceptionMessage($e);

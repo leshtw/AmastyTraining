@@ -101,7 +101,7 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
 //        $this->blacklistResource->save($blacklist);
 
 
-        $qrt = $this->getRequest()->getPost()->get('qty');
+        $qty = $this->getRequest()->getPost()->get('qty');
         $sku = $this->getRequest()->getPost()->get('sku');
 
 
@@ -133,7 +133,7 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
 //            if (!$quote->getId()) {
 //                $quote->save();
 //            }
-//            $quote->addProduct($product,$qrt);
+//            $quote->addProduct($product,$qty);
 //            $quote->save();
 //        }
 
@@ -142,7 +142,7 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
 
         foreach ($qtyMain as $value => $i) {
             if ($i->getSku() === $sku) {
-                $startQrt = $i->getQty();
+                $startQty = $i->getQty();
             }
         }
 
@@ -176,7 +176,7 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
 
 
             try {
-                $quote->addProduct($product, $qrt);
+                $quote->addProduct($product, $qty);
                 $quote->save();
                 $this->messageManager->addSuccessMessage('added');
 
@@ -188,11 +188,11 @@ class Frm extends Action implements HttpGetActionInterface, HttpPostActionInterf
 
         } else if ($product->getTypeID() === 'simple' && $blacklistsku->getData('product_qty')) {
             try {
-                if ($qrt + $startQty < $blacklistsku->getData('product_qty')) {
-                    $quote->addProduct($product, $qrt);
+                if ($qty + $startQty < $blacklistsku->getData('product_qty')) {
+                    $quote->addProduct($product, $qty);
                     $quote->save();
                     $this->messageManager->addSuccessMessage('added');
-                } else if ($qrt + $startQty > $blacklistsku->getData('product_qty')) {
+                } else if ($qty + $startQty > $blacklistsku->getData('product_qty')) {
                     $quote->addProduct($product, $blacklistsku->getData('product_qty'));
                     $quote->save();
                     $this->messageManager->addSuccessMessage('We were able to add only' ." ". $blacklistsku->getData('product_qty'));

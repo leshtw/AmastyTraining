@@ -48,12 +48,13 @@ class Index extends Action implements HttpGetActionInterface
     public function execute()
     {
 
-        if ($this->session->isLoggedIn()) {
-
-        if ($this->scopeConfig->isSetFlag('my_config/general/enabled')) {
-            return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        }} else {
-            die('Sorry, not registration');
-        }
+//        if ($this->session->isLoggedIn()) {
+//
+//        if ($this->scopeConfig->isSetFlag('my_config/general/enabled')) {
+//            return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+//        }} else {
+//            die('Sorry, not registration');
+//        }
+//        return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }
 }

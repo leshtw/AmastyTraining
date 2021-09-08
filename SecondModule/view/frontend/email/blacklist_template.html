@@ -1,0 +1,13 @@
+<!--@subject Amasty SecondModule Blacklist Notification @-->
+<!--@vars {
+"var blacklist":"Blacklist",
+"var blacklist_id":"Blacklist ID",
+"var sku":"Sku",
+"var qty":"Qty"
+} @-->
+{{template config_path="design/email/header_template"}}
+<p>{{trans "Be on the blacklist sku %sku" sku=$sku}}</p>
+<p>{{trans "blacklist_id:" blacklist_id=$blacklist_id}}</p>
+<p>Qty: {{var qty}}</p>
+
+    {{template config_path="design/email/footer_template"}}
